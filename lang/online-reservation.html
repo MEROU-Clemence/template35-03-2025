@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="{{CurrentLang.IsoLang}}" culture="{{CurrentLang.CultureLang}}">
+<head>
+    <title>{{ResourcesTemplate.BookTitle}} - {{CustomTitle}} - {{City}} - {{Country}}</title>
+    <meta name="description" content="{{MetaDescriptionOnlineReservation}}">
+    {{>CommonMetaTags}}
+    <link rel="canonical" href="{{UrlOnlineBooking}}" />
+    <meta property="og:url" content="{{UrlOnlineBooking}}" />
+    <meta property="og:title" content="{{ResourcesTemplate.BookTitle}}" />
+    <meta property="og:image" content="{{#Photos.0}}{{UrlMedias}}/crop-300x200/{{IdMedia}}/{{FileNamePhoto}}{{/Photos.0}}" />
+    <meta property="og:description" content="{{MetaDescriptionOnlineReservation}}" />
+    {{>FaviconTags}}
+    {{>CommonStylesheets}}
+    {{#HasBookingActivated}}{{>ScriptCalendarClick}}{{/HasBookingActivated}}
+</head>
+<body>
+    {{{ScriptAnalytics}}}
+    {{{GoogleTagManagerBody}}}
+
+    <main>
+        <!-- SECTION BANNER & WIDGET BE -->
+        <section class="section-widget-be">
+            <div class="content-section">
+
+                {{>Header}}
+
+                <div class="img-video-and-title">
+                    <img class="section-title-BG bg-img" src="{{#Photos.4}}{{UrlMedias}}/crop-1600x400/{{IdMedia}}/{{FileNamePhoto}}{{/Photos.4}}{{^Photos.4}}{{#Photos.0}}{{UrlMedias}}/crop-1600x400/{{IdMedia}}/{{FileNamePhoto}}{{/Photos.0}}{{/Photos.4}}" alt="{{NamePhoto}}-bg-reservation" />
+
+                    <h1>{{ResourcesTemplate.BookYourTrip}} !</h1>
+                </div>
+
+                {{#HasBookingActivated}}
+                <div id="section-BE" class="section-BE-home">
+                    <div class="check-availability">
+                        <div class="rounded-box">
+                            {{>Widget-BE}}
+                            {{>Widget-BE-secure}}
+                        </div>
+                    </div>
+                </div>
+                {{/HasBookingActivated}}
+
+            </div>
+        </section>
+
+        {{#HasCalendarActivated}}
+        <!-- SECTION CALENDAR -->
+        {{>Calendar}}
+        {{/HasCalendarActivated}}
+    </main>
+
+    {{>Footer}}
+    {{>CommonScripts}}
+    {{>Messenger}}
+</body>
+</html>

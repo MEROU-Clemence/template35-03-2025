@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="{{CurrentLang.IsoLang}}" culture="{{CurrentLang.CultureLang}}">
+<head>
+    <title>{{CurrentPage.TitlePage}} - {{CustomTitle}} - {{City}} - {{Country}}</title>
+    <meta name="description" content="{{CurrentPage.TextPageWithoutHtmlLength150}}">
+    {{>CommonMetaTags}}
+    <link rel="canonical" href="{{UrlPageTemplate}}" />
+    <meta property="og:url" content="{{UrlPageTemplate}}" />
+    <meta property="og:title" content="{{CurrentPage.TitlePage}}" />
+    <meta property="og:image" content="{{#CurrentPage.PhotosPage.0}}{{UrlMedias}}/crop-300x200/{{IdMedia}}/{{FileNamePhoto}}{{/CurrentPage.PhotosPage.0}}{{^CurrentPage.PhotosPage.0}}{{#Photos.0}}{{UrlMedias}}/crop-300x200/{{IdMedia}}/{{FileNamePhoto}}{{/Photos.0}}{{/CurrentPage.PhotosPage.0}}" />
+    <meta property="og:description" content="{{CurrentPage.TextPageLength150}}" />
+    {{>FaviconTags}}
+    {{>CommonStylesheets}}
+</head>
+<body>
+    {{{ScriptAnalytics}}}
+    {{{GoogleTagManagerBody}}}
+
+    <main>
+        <!-- SECTION BANNER & WIDGET BE -->
+        <section class="section-widget-be">
+            <div class="content-section">
+
+                {{>Header}}
+
+                <div class="img-video-and-title">
+                    <img class="section-title-BG bg-img" src="{{#CurrentPage.PhotosPage.0}}{{UrlMedias}}/crop-1600x400/{{IdMedia}}/{{FileNamePhoto}}{{/CurrentPage.PhotosPage.0}}{{^CurrentPage.PhotosPage.0}}{{#Photos.0}}{{UrlMedias}}/crop-1600x400/{{IdMedia}}/{{FileNamePhoto}}{{/Photos.0}}{{/CurrentPage.PhotosPage.0}}" alt="{{NamePhoto}}-bg-page" />
+
+                    <h1>{{ResourcesTemplate.DiscoverOurWorld}}</h1>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECTION PAGE -->
+        <section class="section section-page-news">
+            <div class="content-section">
+
+                <!-- SECTION AUTRES PAGES -->
+                <div class="other-pages">
+                    {{#Pages}}
+                    <a href="{{UrlPageTemplate}}">{{TitlePage}}</a>
+                    {{/Pages}}
+                </div>
+
+                <!-- PAGE -->
+                <div class="page-news-contain">
+                    {{#CurrentPage.PhotosPage.1}}
+                    <div class="owl-wrapper">
+                        <div class="owl-carousel owl-theme slider-page-page">
+                            {{#CurrentPage.PhotosPage}}
+                            <div class="photo-page">
+                                <img src="{{UrlMedias}}/crop-1300x700/{{IdMedia}}/{{FileNamePhoto}}" alt="{{NamePhoto}}-page">
+                            </div>
+                            {{/CurrentPage.PhotosPage}}
+                        </div>
+                    </div>
+                    {{/CurrentPage.PhotosPage.1}}
+                    {{^CurrentPage.PhotosPage.1}}
+                    {{#CurrentPage.PhotosPage}}
+                    <div class="photo-page">
+                        <img src="{{UrlMedias}}/crop-1300x700/{{IdMedia}}/{{FileNamePhoto}}" alt="{{NamePhoto}}-page">
+                    </div>
+                    {{/CurrentPage.PhotosPage}}
+                    {{/CurrentPage.PhotosPage.1}}
+
+                    <div class="infos-page">
+                        <h2>{{CurrentPage.TitlePage}}</h2>
+
+                        <div class="description-page">{{{CurrentPage.TextPage}}}</div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECTION GALERIE -->
+        <section class="section section-gallery">
+            <div class="content-section">
+
+                <div class="photo-counter">
+                    <div class="current-photo-container">
+                        <span class="slide-number current">01</span>
+                    </div>
+                    <span class="separator">/</span>
+                    <span class="total-photos"></span>
+                </div>
+
+                <div class="slider-gallery-contain">
+                    <div class="slider-gallery">
+                        {{#Photos}}
+                        <div class="slide-gallery">
+                            <img class="img-gallery" src="{{UrlMedias}}/crop-1300x800/{{IdMedia}}/{{FileNamePhoto}}" alt="{{NamePhoto}}-photo-gallery">
+                        </div>
+                        {{/Photos}}
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        {{#HasNewsletterActivated}}
+        <!-- SECTION NEWSLETTER -->
+        {{>Newsletter}}
+        {{/HasNewsletterActivated}}
+    </main>
+
+    {{>Footer}}
+    {{>CommonScripts}}
+    {{>Messenger}}
+</body>
+</html>

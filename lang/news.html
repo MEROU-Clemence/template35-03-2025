@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="{{CurrentLang.IsoLang}}" culture="{{CurrentLang.CultureLang}}">
+<head>
+    <title>{{ResourcesTemplate.NewsPageTitle}} - {{CustomTitle}} - {{City}} - {{Country}}</title>
+    <meta name="description" content="{{MetaDescriptionNews}}">
+    {{>CommonMetaTags}}
+    <link rel="canonical" href="{{UrlNews}}" />
+    <meta property="og:url" content="{{UrlNews}}" />
+    <meta property="og:title" content="{{ResourcesTemplate.NewsPageTitle}}" />
+    <meta property="og:image" content="{{#Photos.0}}{{UrlMedias}}/crop-300x200/{{IdMedia}}/{{FileNamePhoto}}{{/Photos.0}}" />
+    <meta property="og:description" content="{{MetaDescriptionNews}}" />
+    {{>FaviconTags}}
+    {{>CommonStylesheets}}
+</head>
+<body>
+    {{{ScriptAnalytics}}}
+    {{{GoogleTagManagerBody}}}
+
+    <main>
+        <!-- SECTION BANNER & WIDGET BE -->
+        <section class="section-widget-be">
+            <div class="content-section">
+
+                {{>Header}}
+
+                <div class="img-video-and-title">
+                    <img class="section-title-BG bg-img" src="{{#Photos.1}}{{UrlMedias}}/crop-1600x400/{{IdMedia}}/{{FileNamePhoto}}{{/Photos.1}}{{^Photos.1}}{{#Photos.0}}{{UrlMedias}}/crop-1600x400/{{IdMedia}}/{{FileNamePhoto}}{{/Photos.0}}{{/Photos.1}}" alt="{{NamePhoto}}-bg-news" />
+
+                    <h1>{{ResourcesTemplate.DiscoverOurNews2}}</h1>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECTION NEWS -->
+        <section class="section section-page-news">
+            <div class="content-section">
+
+                <!-- SECTION AUTRES NEWS -->
+                <div class="other-pages">
+                    {{#NewsList}}
+                    <a href="#{{IdNews}}">{{TitleNews}}</a>
+                    {{/NewsList}}
+                </div>
+
+                <!-- NEWS -->
+                {{#NewsList}}
+                <div class="page-news-contain" id="{{IdNews}}" data-pagination-item>
+                    {{#ListPhotoNews.0}}
+                    {{#ListPhotoNews.1}}
+                    <div class="owl-wrapper">
+                        <div class="owl-carousel owl-theme slider-page-page">
+                            {{#ListPhotoNews}}
+                            <div class="photo-page">
+                                <img src="{{UrlMedias}}/crop-1300x700/{{IdMedia}}/{{FileNamePhoto}}" alt="{{NamePhoto}}-news">
+                            </div>
+                            {{/ListPhotoNews}}
+                        </div>
+                    </div>
+                    {{/ListPhotoNews.1}}
+                    {{^ListPhotoNews.1}}
+                    {{#ListPhotoNews}}
+                    <div class="photo-page">
+                        <img src="{{UrlMedias}}/crop-750x560/{{IdMedia}}/{{FileNamePhoto}}" alt="{{NamePhoto}}-news">
+                    </div>
+                    {{/ListPhotoNews}}
+                    {{/ListPhotoNews.1}}
+                    {{/ListPhotoNews.0}}
+
+                    {{^ListPhotoNews.0}}
+                    <div class="photo-page">
+                        <img src="https://static.elloha.com/webgen/img/news.jpg" alt="{{NamePhoto}}-news">
+                    </div>
+                    {{/ListPhotoNews.0}}
+
+                    <div class="infos-page">
+                        <h2>{{TitleNews}}</h2>
+
+                        <span>{{ArticleCreatedOn}} {{DateNewsString}}</span>
+
+                        <div class="description-page">{{{TextNews}}}</div>
+
+                        {{#UrlYoutube}}
+                        <div class="option-youtube"><iframe src="{{UrlYoutube}}" frameborder="0" allowfullscreen></iframe></div>
+                        {{/UrlYoutube}}
+                    </div>
+                </div>
+                {{/NewsList}}
+
+            </div>
+        </section>
+
+        {{#HasNewsletterActivated}}
+        <!-- SECTION NEWSLETTER -->
+        {{>Newsletter}}
+        {{/HasNewsletterActivated}}
+    </main>
+
+    {{>Footer}}
+    {{>CommonScripts}}
+    {{>Messenger}}
+</body>
+</html>

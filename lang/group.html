@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="{{CurrentLang.IsoLang}}" culture="{{CurrentLang.CultureLang}}">
+<head>
+    <title>{{CurrentGroupePrestation.TitreGroupe}} - {{CustomTitle}} - {{City}} - {{Country}}</title>
+    <meta name="description" content="{{CustomTitle}} - {{CurrentGroupePrestation.TitreGroupe}}">
+    {{>CommonMetaTags}}
+    <link rel="canonical" href="{{UrlOffers}}" />
+    <meta property="og:url" content="{{UrlOffers}}" />
+    <meta property="og:title" content="{{CurrentGroupePrestation.TitreGroupe}}" />
+    <meta property="og:image" content="{{#Photos.0}}{{UrlMedias}}/crop-300x200/{{IdMedia}}/{{FileNamePhoto}}{{/Photos.0}}" />
+    <meta property="og:description" content="{{CustomTitle}} - {{CurrentGroupePrestation.TitreGroupe}}" />
+    {{>FaviconTags}}
+    {{>CommonStylesheets}}
+</head>
+
+<body>
+    {{{ScriptAnalytics}}}
+    {{{GoogleTagManagerBody}}}
+
+    <main class="offers">
+        <!-- SECTION BANNER & WIDGET BE -->
+        <section class="section-widget-be">
+            <div class="content-section">
+
+                {{>Header}}
+
+                <div class="img-video-and-title">
+                    <img class="section-title-BG bg-img" src="{{#CurrentGroupePrestation.PhotoGroupe}}{{UrlMedias}}/crop-1600x400/{{IdMedia}}/{{FileNamePhoto}}{{/CurrentGroupePrestation.PhotoGroupe}}" alt="{{NamePhoto}}-bg-groupe" />
+
+                    <h1>{{ResourcesTemplate.ChooseYourActivity}}</h1>
+                </div>
+
+                {{#HasBookingActivated}}
+                <div id="section-BE" class="section-BE-home">
+                    <div class="check-availability">
+                        <div class="rounded-box">
+                            {{>Widget-BE}}
+                            {{>Widget-BE-secure}}
+                        </div>
+                    </div>
+                </div>
+                {{/HasBookingActivated}}
+
+            </div>
+        </section>
+
+        <!-- SECTION PRESTAS/OFFRES -->
+        <section class="section">
+            <div class="content-section">
+
+                <div class="section-title">
+                    <h2>{{CurrentGroupePrestation.TitreGroupe}}</h2>
+                </div>
+
+                <div class="prestas-big-contain prestas-big-contain-in-offers">
+                    {{#CurrentGroupePrestation.PrestasGroupe}}
+                    <div class="presta-contain">
+                        <div class="img-presta-contain">
+                            {{#MinPricePresta}}
+                            <div class="saw-prices">
+                                <span class="price-begin">{{ResourcesTemplate.PriceFrom}}</span>
+                                <span class="presta-price">
+                                    {{MinPricePresta}}{{CurrencySymbol}}{{^isActivity}} /{{ResourcesTemplate.Night}}{{/isActivity}}
+                                </span>
+                            </div>
+                            {{/MinPricePresta}}
+
+                            <div class="owl-carousel owl-theme slider-img-offers">
+                                {{#PhotosPresta}}
+                                <a href="{{UrlPrestaTemplate}}" class="bg-img" style="background-image: url({{UrlMedias}}/crop-800x800/{{IdMedia}}/{{FileNamePhoto}});" alt="{{NamePhoto}}-presta" itemprop="url"></a>
+                                {{/PhotosPresta}}
+                            </div>
+                            {{^PhotosPresta}}
+                            <a href="{{UrlPrestaTemplate}}" class="bg-img" style="background-image: url({{#Photos.1}}{{UrlMedias}}/crop-800x800/{{IdMedia}}/{{FileNamePhoto}}{{/Photos.1}});" alt="{{NamePhoto}}-presta" itemprop="url"></a>
+                            {{/PhotosPresta}}
+                        </div>
+
+                        <div class="infos-contain">
+                            <h3><a href="{{UrlPrestaTemplate}}" itemprop="url">{{TitrePresta}}</a></h3>
+
+                            {{#DescriptionPresta}}
+                            <div class="description-presta">{{{DescriptionPresta}}}</div>
+                            {{/DescriptionPresta}}
+                        </div>
+                    </div>
+                    {{/CurrentGroupePrestation.PrestasGroupe}}
+                </div>
+
+            </div>
+        </section>
+
+        {{#HasCalendarActivated}}
+        <!-- SECTION CALENDAR -->
+        {{>Calendar}}
+        {{/HasCalendarActivated}}
+
+        {{#HasNewsletterActivated}}
+        <!-- SECTION NEWSLETTER -->
+        {{>Newsletter}}
+        {{/HasNewsletterActivated}}
+    </main>
+
+    {{>Footer}}
+    {{>CommonScripts}}
+    {{>Messenger}}
+</body>
+
+</html>

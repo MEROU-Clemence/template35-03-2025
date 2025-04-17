@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="{{CurrentLang.IsoLang}}" culture="{{CurrentLang.CultureLang}}">
+<head>
+    <title>{{CustomTitle}} - {{City}} - {{Country}}</title>
+    <meta name="description" content="{{Descriptions.0.DescLength150}}">
+    {{>CommonMetaTags}}
+    <link rel="canonical" href="{{UrlRoot}}" />
+    <meta property="og:url" content="{{UrlRoot}}" />
+    <meta property="og:title" content="{{CustomTitle}}" />
+    <meta property="og:image" content="{{#Photos.0}}{{UrlMedias}}/crop-300x200/{{IdMedia}}/{{FileNamePhoto}}{{/Photos.0}}" />
+    <meta property="og:description" content="{{Descriptions.0.DescLength150}}" />
+    {{>FaviconTags}}
+    {{>CommonStylesheets}}
+    <link rel="stylesheet" href="https://static.elloha.com/webgen/css/newcookieconsent.css">
+    {{#HasBookingActivated}}{{>ScriptCalendarClick}}{{/HasBookingActivated}}
+</head>
+<body>
+    {{{ScriptAnalytics}}}
+    {{{GoogleTagManagerBody}}}
+
+    <main>
+        <!-- SECTION WIDGET BE -->
+        <section class="section-widget-be">
+            <div class="content-section">
+
+                {{>Header}}
+
+                <div class="img-video-and-title">
+                    {{^HasHomeVideoActivated}}
+                    <img class="img-principale bg-img" src="{{#Photos.0}}{{UrlMedias}}/crop-1600x800/{{IdMedia}}/{{FileNamePhoto}}{{/Photos.0}}" alt="{{NamePhoto}}-photo-principale">
+                    {{/HasHomeVideoActivated}}
+
+                    {{#HasHomeVideoActivated}}
+                    <!-- SECTION VIDEO -->
+                    <div class="video-home video-wrap">
+                        <div id="player"></div>
+                        <input type="hidden" value="{{HomeVideoId}}" id="YoutubeVideoId" />
+                    </div>
+                    {{/HasHomeVideoActivated}}
+
+                    <h1>{{CustomTitle}}<sup class="rating-stars">{{{Rating}}}</sup></h1>
+                </div>
+
+                {{#HasBookingActivated}}
+                <div id="section-BE" class="section-BE-home">
+                    <div class="check-availability">
+                        <div class="rounded-box {{#isActivity}}rounded-activity{{/isActivity}}">
+                            {{>Widget-BE}}
+                            {{>Widget-BE-secure}}
+                        </div>
+                    </div>
+                </div>
+                {{/HasBookingActivated}}
+
+            </div>
+        </section>
+
+        <!-- SECTION PRESENTATION & SCEA -->
+        <section class="section">
+            <div class="content-section">
+
+                <div class="bloc-presentation">
+                    <!-- SECTION PRESENTATION -->
+                    <div class="presentation-and-avatar">
+                        <div class="presentation">
+                            <h2>{{Descriptions.0.TitleDesc}}</h2>
+
+                            <div class="description">{{{Descriptions.0.LibelleDescHtml}}}</div>
+
+                            <div id="seeMore2" class="more-less-btn-contain">
+                                <a href="#" class="more-less-btn">{{ResourcesTemplate.ReadMore2}}</a>
+                            </div>
+                            <div id="seeLess2" class="more-less-btn-contain">
+                                <a href="#" class="more-less-btn">{{ResourcesTemplate.ReadLess2}}</a>
+                            </div>
+                        </div>
+
+                        <div class="avatar-user">
+                            {{#HasAvatar}}
+                            <div class="avatar-img bg-img" style="background-image: url({{PhotoUserUrl}});" alt="{{NamePhoto}}"></div>
+                            {{/HasAvatar}}
+
+                            {{#DisplayUserInfos}}
+                            <div class="infos-user">
+                                <span class="name-user">{{NameUser}}</span>
+
+                                {{#FonctionUser}}
+                                <span>{{FonctionUser}}</span>
+                                {{/FonctionUser}}
+                            </div>
+                            {{/DisplayUserInfos}}
+                        </div>
+                    </div>
+
+                    {{#HasSCEA}}
+                    <hr />
+
+                    <!-- SECTION SCEA -->
+                    <div class="section-scea">
+                        <h3>{{ResourcesTemplate.TheServices}}</h3>
+
+                        <div class="options-scea-contain">
+                            {{#SCEA}}
+                            <div class="options-scea">{{LibelleService}}</div>
+                            {{/SCEA}}
+                        </div>
+
+                        <div id="seeMore1" class="more-less-btn-contain">
+                            <a href="#" class="more-less-btn">{{ResourcesTemplate.SeeMore}}</a>
+                        </div>
+                        <div id="seeLess1" class="more-less-btn-contain">
+                            <a href="#" class="more-less-btn">{{ResourcesTemplate.SeeLess}}</a>
+                        </div>
+                    </div>
+                    {{/HasSCEA}}
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECTION GALERIE -->
+        <section class="section section-gallery">
+            <div class="content-section">
+
+                <div class="photo-counter">
+                    <div class="current-photo-container">
+                        <span class="slide-number current">01</span>
+                    </div>
+                    <span class="separator">/</span>
+                    <span class="total-photos"></span>
+                </div>
+
+                <div class="slider-gallery-contain">
+                    <div class="slider-gallery">
+                        {{#Photos}}
+                        <div class="slide-gallery">
+                            <img class="img-gallery" src="{{UrlMedias}}/crop-1300x800/{{IdMedia}}/{{FileNamePhoto}}" alt="{{NamePhoto}}-photo-gallery">
+                        </div>
+                        {{/Photos}}
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECTION PRESTAS/OFFRES -->
+        <section class="section">
+            <div class="content-section">
+
+                <div class="section-title">
+                    <h2>{{^isActivity}}{{ResourcesTemplate.Offers_OurOffers_1}}{{/isActivity}}{{#isActivity}}{{^IsRestaurant}}{{ResourcesTemplate.Offers_OurOffers_5}}{{/IsRestaurant}}{{/isActivity}}{{#isActivity}}{{#IsRestaurant}}{{ResourcesTemplate.CarteMenus}}{{/IsRestaurant}}{{/isActivity}}</h2>
+                </div>
+
+                <div class="owl-carousel owl-theme slider-prestas">
+                    {{#Prestations}}
+                    <div class="presta-contain">
+                        <div class="img-presta-contain">
+                            {{#MinPricePresta}}
+                            <div class="saw-prices">
+                                <span class="price-begin">{{ResourcesTemplate.PriceFrom}}</span>
+                                <span class="presta-price">
+                                    {{MinPricePresta}}{{CurrencySymbol}}{{^isActivity}} /{{ResourcesTemplate.Night}}{{/isActivity}}
+                                </span>
+                            </div>
+                            {{/MinPricePresta}}
+
+                            <div class="owl-carousel owl-theme slider-img-prestas">
+                                {{#PhotosPresta}}
+                                <a href="{{UrlPrestaTemplate}}" class="bg-img" style="background-image: url({{UrlMedias}}/crop-800x800/{{IdMedia}}/{{FileNamePhoto}});" alt="{{NamePhoto}}-presta" itemprop="url"></a>
+                                {{/PhotosPresta}}
+                            </div>
+                            {{^PhotosPresta}}
+                            <a href="{{UrlPrestaTemplate}}" class="bg-img" style="background-image: url({{#Photos.1}}{{UrlMedias}}/crop-800x800/{{IdMedia}}/{{FileNamePhoto}}{{/Photos.1}});" alt="{{NamePhoto}}-presta" itemprop="url"></a>
+                            {{/PhotosPresta}}
+                        </div>
+
+                        <div class="infos-contain">
+                            <h3><a href="{{UrlPrestaTemplate}}" itemprop="url">{{TitrePresta}}</a></h3>
+
+                            {{#DescriptionPresta}}
+                            <div class="description-presta">{{{DescriptionPresta}}}</div>
+                            {{/DescriptionPresta}}
+                        </div>
+                    </div>
+                    {{/Prestations}}
+                </div>
+
+                <div class="btn-contain btn-contain-prestas">
+                    <a class="btn" href="{{UrlOffers}}" itemprop="url">{{^isActivity}}{{ResourcesTemplate.AllOurRooms}}{{/isActivity}}{{#isActivity}}{{^IsRestaurant}}{{ResourcesTemplate.AllOurActivities}}{{/IsRestaurant}}{{/isActivity}}{{#isActivity}}{{#IsRestaurant}}{{ResourcesTemplate.CarteMenus}}{{/IsRestaurant}}{{/isActivity}}</a>
+                </div>
+
+            </div>
+        </section>
+
+        {{#HasSpecialOffers}}
+        <!-- SECTION OFFRES SPECIALES -->
+        {{>SpecialOffers}}
+        {{/HasSpecialOffers}}
+
+        {{#HasCalendarActivated}}
+        <!-- SECTION CALENDAR -->
+        {{>Calendar}}
+        {{/HasCalendarActivated}}
+
+        {{#isActivity}}
+        <!-- SECTION HORAIRES -->
+        <section class="section">
+            <div class="content-section">
+
+                <div class="hours-contain">
+                    <h3>{{ResourcesTemplate.OpeningHours2}}</h3>
+
+                    <div class="all-hours">
+                        {{#Openings}}
+                        <div class="text-infos-hours">
+                            <div class="day-hours"><strong>{{DayLabel}}</strong></div>
+
+                            <div class="hours-hours">
+                                {{#IsClosed}}
+                                <div class="closed">{{ResourcesTemplate.Closed}}</div>
+                                {{/IsClosed}}
+
+                                {{^IsClosed}}{{#HasBreak}}
+                                <div class="hours-with-break">
+                                    <div>{{StartHourBeforeBreak}} - {{EndHourBeforeBreak}}</div>
+
+                                    <div>{{StartHourAfterBreak}} - {{EndHourAfterBreak}}</div>
+                                </div>
+                                {{/HasBreak}}{{/IsClosed}}
+
+                                {{^IsClosed}}{{^HasBreak}}
+                                <div>{{StartHour}} - {{EndHour}}</div>
+                                {{/HasBreak}}{{/IsClosed}}
+                            </div>
+                        </div>
+                        {{/Openings}}
+                    </div>
+                </div>
+
+            </div>
+        </section>
+        {{/isActivity}}
+
+        <!-- SECTION MAP & METEO -->
+        <section class="section">
+            <div class="content-section">
+
+                <div class="section-title">
+                    <h2>{{ResourcesTemplate.WhereAreWe}}</h2>
+                </div>
+
+                <div class="map-and-meteo-contain">
+                    <div class="section-map">
+                        <div id="applemapkit" class="fullwidth-mapkit">
+                            <div id="mapApple"></div>
+                        </div>
+                    </div>
+
+                    <div class="meteo-and-address">
+                        <div class="address-and-btn-contain">
+                            <div class="address-contain">
+                                <span><strong>{{ResourcesTemplate.ToCome}}</strong></span>
+
+                                <div class="address-line"><i class="las la-map-marker"></i><strong>{{CustomTitle}}, {{AddressLine}}, {{PostalCode}} {{City}}</strong></div>
+                            </div>
+
+                            <div class="btn-contain btn-contain-map-2">
+                                <div data-action="external-map" class="external-map btn">{{ResourcesTemplate.Itinerary}}</div>
+                            </div>
+                        </div>
+
+                        <div class="meteo-contain owl-carousel owl-theme slider-meteo">
+                            {{! Current conditions }}
+                            <div class="weather-item">
+                                <div class="date-and-city">
+                                    <span>{{CurrentLang.Day}}</span>
+                                    <span>.</span>
+                                    <span>{{City}}</span>
+                                    <span id="WeatherCcTemperature">{{CurrentWeather.WeatherTemperature}}°{{CurrentLang.TemperatureUnit}}</span>
+                                </div>
+
+                                <div class="weather-img-contain">
+                                    <canvas id="WeatherCcIcon" data="{{CurrentWeather.WeatherIcon}}" class="weather-icon"></canvas>
+
+                                    <div class="meteo-img" data-url="https://static.elloha.com/webgen/img/weather/">
+                                        <div class="opacity"></div>
+                                    </div>
+
+                                    <div class="weather-trad" data="{{CurrentWeather.WeatherIcon}}"></div>
+                                </div>
+                            </div>
+                            {{! Day + 1 }}
+                            <div class="weather-item">
+                                <div class="date-and-city">
+                                    <span>{{CurrentLang.DayPlus1}}</span>
+                                    <span>.</span>
+                                    <span id="WeatherDay1Temperature">{{NextDaysWeather.0.WeatherTemperature}}°{{CurrentLang.TemperatureUnit}}</span>
+                                </div>
+
+                                <div class="weather-img-contain">
+                                    <canvas id="WeatherCcIcon" data="{{NextDaysWeather.0.WeatherIcon}}" class="weather-icon"></canvas>
+
+                                    <div class="meteo-img" data-url="https://static.elloha.com/webgen/img/weather/">
+                                        <div class="opacity"></div>
+                                    </div>
+
+                                    <div class="weather-trad" data="{{NextDaysWeather.0.WeatherIcon}}"></div>
+                                </div>
+                            </div>
+                            {{! Day + 2 }}
+                            <div class="weather-item">
+                                <div class="date-and-city">
+                                    <span>{{CurrentLang.DayPlus2}}</span>
+                                    <span>.</span>
+                                    <span id="WeatherDay2Temperature">{{NextDaysWeather.1.WeatherTemperature}}°{{CurrentLang.TemperatureUnit}}</span>
+                                </div>
+
+                                <div class="weather-img-contain">
+                                    <canvas id="WeatherCcIcon" data="{{NextDaysWeather.1.WeatherIcon}}" class="weather-icon"></canvas>
+
+                                    <div class="meteo-img" data-url="https://static.elloha.com/webgen/img/weather/">
+                                        <div class="opacity"></div>
+                                    </div>
+
+                                    <div class="weather-trad" data="{{NextDaysWeather.1.WeatherIcon}}"></div>
+                                </div>
+                            </div>
+                            {{! Day + 3 }}
+                            <div class="weather-item">
+                                <div class="date-and-city">
+                                    <span>{{CurrentLang.DayPlus3}}</span>
+                                    <span>.</span>
+                                    <span id="WeatherDay3Temperature">{{NextDaysWeather.2.WeatherTemperature}}°{{CurrentLang.TemperatureUnit}}</span>
+                                </div>
+
+                                <div class="weather-img-contain">
+                                    <canvas id="WeatherCcIcon" data="{{NextDaysWeather.2.WeatherIcon}}" class="weather-icon"></canvas>
+
+                                    <div class="meteo-img" data-url="https://static.elloha.com/webgen/img/weather/">
+                                        <div class="opacity"></div>
+                                    </div>
+
+                                    <div class="weather-trad" data="{{NextDaysWeather.2.WeatherIcon}}"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="btn-contain btn-contain-map-1">
+                            <div data-action="external-map" class="external-map btn">{{ResourcesTemplate.Itinerary}}</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        {{#HasReviewsBlocActivated}}
+        <!-- SECTION AVIS -->
+        <section class="section">
+            <div class="content-section">
+
+                <div class="section-title">
+                    <h2>{{ResourcesTemplate.RatingsReviews}}</h2>
+                </div>
+
+                <div class="user-and-slider-avis">
+                    <div class="user-and-btn-contact">
+                        <div class="avatar-user avatar-user-avis">
+                            {{#HasAvatar}}
+                            <div class="avatar-img bg-img" style="background-image: url({{PhotoUserUrl}});" alt="{{NamePhoto}}"></div>
+                            {{/HasAvatar}}
+
+                            {{#DisplayUserInfos}}
+                            <div class="infos-user">
+                                <span class="name-user">{{NameUser}}</span>
+
+                                {{#FonctionUser}}
+                                <span>{{FonctionUser}}</span>
+                                {{/FonctionUser}}
+                            </div>
+                            {{/DisplayUserInfos}}
+                        </div>
+
+                        <div class="btn-contain">
+                            <a class="btn" href="{{UrlContact}}" itemprop="url">
+                                {{^isActivity}}{{ResourcesTemplate.ContactAccommodation}}{{/isActivity}}
+                                {{#isActivity}}{{^IsRestaurant}}{{ResourcesTemplate.ContactActivity}}{{/IsRestaurant}}{{/isActivity}}
+                                {{#isActivity}}{{#IsRestaurant}}{{ResourcesTemplate.ContactRestaurant}}{{/IsRestaurant}}{{/isActivity}}
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="avis-big-contain owl-carousel owl-theme avis-slider">
+                        {{#HasTripAdvisorWidgetActivated}}
+                        <div class="tripadvisor">
+                            <div id="TA_selfserveprop305" class="TA_selfserveprop">
+                                <ul id="heyZm1bjWr" class="TA_links TJXUQcKl6zhk">
+                                    <li id="3USOaCl3wjK" class="Kfd0SDvr8">
+                                        <a target="_blank" href="https://www.tripadvisor.fr/"><img src="https://www.tripadvisor.fr/img/cdsi/img2/branding/150_logo-11900-2.png" class="lazyload" alt="TripAdvisor" /></a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <script async src="https://www.jscache.com/wejs?wtype=selfserveprop&amp;uniq=305&amp;locationId={{CodeTripAdvisor}}&amp;lang=fr&amp;rating=true&amp;nreviews=3&amp;writereviewlink=true&amp;popIdx=true&amp;iswide=true&amp;border=true&amp;display_version=2"></script>
+                        </div>
+                        {{/HasTripAdvisorWidgetActivated}}
+
+                        {{#HasBookingGuestsScoreActivated}}
+                        <div class="booking">
+                            <div class="booking-widget content-white-bg">
+                                <div class="booking-logo">
+                                    <img src="https://static.elloha.com/elloha/Images/logo-booking.png" alt="logo-booking">
+                                </div>
+                                <div class="booking-top">
+                                    <div class="global-note-w">
+                                        <span id="GlobalNote" class="global-note">{{BookingGuestsReviewScore}}</span>
+                                    </div>
+                                    <div class="global-review-w">
+                                        <div class="global-review">{{BookingGuestsReviewScoreLabel}}</div>
+                                        <div class="experiences-lived">{{BookingGuestsReviewScoreCount}} {{ResourcesTemplate.LivedExperiences}}</div>
+                                    </div>
+                                </div>
+                                <ul class="booking-scores">
+                                    <li class="scrore mb-15">
+                                        <p class="f-open-sans f-size-14 d-block w-100-p m-bottom-10">
+                                            <i class="las la-broom"></i> {{ResourcesTemplate.Cleanliness}}
+                                            <span class="float-right" id="">{{BookingGuestsCleanScore}}</span>
+                                        </p>
+                                        <div class="note-bar-w w-100-p relative pos-relative">
+                                            <div class="note-bar back opacity-02 w-100-p"></div>
+                                            <div id="" class="note-bar front pos-absolute" data-score="{{BookingGuestsCleanScore}}"></div>
+                                        </div>
+                                    </li>
+                                    <li class="scrore mb-15">
+                                        <p class="f-open-sans f-size-14 d-block w-100-p m-bottom-10">
+                                            <i class="las la-map-marked-alt"></i> {{ResourcesTemplate.GeographicalLocation}}
+                                            <span class="float-right" id="">{{BookingGuestsLocationScore}}</span>
+                                        </p>
+                                        <div class="note-bar-w w-100-p relative pos-relative">
+                                            <div class="note-bar back opacity-02 w-100-p"></div>
+                                            <div id="" class="note-bar front pos-absolute" data-score="{{BookingGuestsLocationScore}}"></div>
+                                        </div>
+                                    </li>
+                                    <li class="scrore mb-15">
+                                        <p class="f-open-sans f-size-14 d-block w-100-p m-bottom-10">
+                                            <i class="las la-couch"></i> {{ResourcesTemplate.Comfort}}
+                                            <span class="float-right" id="">{{BookingGuestsComfortScore}}</span>
+                                        </p>
+                                        <div class="note-bar-w w-100-p relative pos-relative">
+                                            <div class="note-bar back opacity-02 w-100-p"></div>
+                                            <div id="" class="note-bar front pos-absolute" data-score="{{BookingGuestsComfortScore}}"></div>
+                                        </div>
+                                    </li>
+                                    <li class="scrore mb-15">
+                                        <p class="f-open-sans f-size-14 d-block w-100-p m-bottom-10">
+                                            <i class="las la-blender"></i> {{ResourcesTemplate.Facilities}}
+                                            <span class="float-right" id="">{{BookingGuestsFacilitiesScore}}</span>
+                                        </p>
+                                        <div class="note-bar-w w-100-p relative pos-relative">
+                                            <div class="note-bar back opacity-02 w-100-p"></div>
+                                            <div id="" class="note-bar front pos-absolute" data-score="{{BookingGuestsFacilitiesScore}}"></div>
+                                        </div>
+                                    </li>
+                                    <li class="scrore mb-15">
+                                        <p class="f-open-sans f-size-14 d-block w-100-p m-bottom-10">
+                                            <i class="las la-concierge-bell"></i> {{ResourcesTemplate.Staff}}
+                                            <span class="float-right" id="">{{BookingGuestsStaffScore}}</span>
+                                        </p>
+                                        <div class="note-bar-w w-100-p relative pos-relative">
+                                            <div class="note-bar back opacity-02 w-100-p"></div>
+                                            <div id="" class="note-bar front pos-absolute" data-score="{{BookingGuestsStaffScore}}"></div>
+                                        </div>
+                                    </li>
+                                    <li class="scrore mb-15">
+                                        <p class="f-open-sans f-size-14 d-block w-100-p m-bottom-10">
+                                            <i class="las la-money-bill-wave"></i> {{ResourcesTemplate.QualityPriceRatio}}
+                                            <span class="float-right" id="">{{BookingGuestsValueScore}}</span>
+                                        </p>
+                                        <div class="note-bar-w w-100-p relative pos-relative">
+                                            <div class="note-bar back opacity-02 w-100-p"></div>
+                                            <div id="" class="note-bar front pos-absolute" data-score="{{BookingGuestsValueScore}}"></div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        {{/HasBookingGuestsScoreActivated}}
+
+                        {{#HasFairGuestWidgetActivated}}
+                        <div class="fairguest">
+                            <rc-fairguest-widget-pro id="{{FairGuestID}}" lang="fr-FR" />
+                            <script type="module">
+        (async () => (await import('https://www.fairguest.com/api/v2/fairguest/widgets/{{FairGuestID}}/js')).load())();
+                            </script>
+                        </div>
+                        {{/HasFairGuestWidgetActivated}}
+                    </div>
+                </div>
+
+            </div>
+        </section>
+        {{/HasReviewsBlocActivated}}
+
+        {{#HasNews}}
+        <!-- SECTION NEWS -->
+        <section class="section">
+            <div class="content-section">
+
+                <div class="section-title">
+                    <h2>{{ResourcesTemplate.NewsPageTitle}}</h2>
+                </div>
+
+                <div class="owl-carousel owl-theme slider-news">
+                    {{#NewsList}}
+                    <div class="presta-contain card-size-changed">
+                        {{#PhotoNews}}
+                        <a href="{{UrlNews}}" class="bg-img" style="background-image: url({{UrlMedias}}/crop-800x800/{{IdMedia}}/{{FileNamePhoto}});" alt="{{NamePhoto}}-news" itemprop="url"></a>
+                        {{/PhotoNews}}
+                        {{^PhotoNews}}
+                        <a href="{{UrlNews}}" class="bg-img" style="background-image: url(https://static.elloha.com/webgen/img/news.jpg);" alt="{{NamePhoto}}-news" itemprop="url"></a>
+                        {{/PhotoNews}}
+
+                        <div class="infos-contain">
+                            <div class="title-and-date-news">
+                                <h3><a href="{{UrlNews}}" itemprop="url">{{TitleNews}}</a></h3>
+
+                                <span class="date-news-home">{{ArticleCreatedOn}} {{DateNewsString}}</span>
+                            </div>
+
+                            {{#TextNews}}
+                            <div class="description-presta">{{{TextNews}}}</div>
+                            {{/TextNews}}
+                        </div>
+                    </div>
+                    {{/NewsList}}
+                </div>
+
+                <div class="btn-contain btn-contain-prestas">
+                    <a class="btn" href="{{UrlNews}}" itemprop="url">{{ResourcesTemplate.AllOurNews}}</a>
+                </div>
+
+            </div>
+        </section>
+        {{/HasNews}}
+
+        {{#HasInstagramActivated}}
+        <!-- SECTION INSTA -->
+        <section class="section">
+            <div class="content-section">
+
+                <div class="section-title">
+                    <h2>{{ResourcesTemplate.OurInstagramAccount}}</h2>
+                </div>
+
+                <div class="link-and-follow-insta">
+                    {{ResourcesTemplate.VisitOurInsta}}
+                </div>
+
+                <div class="topiecha-grid">
+                    {{#InstagramMediasList}}
+                    <a href="{{Permalink}}" target="_blank" class="IG-bloc bg-img" style="background-image: url({{ThumbnailUrl}})">
+                    </a>
+                    {{/InstagramMediasList}}
+                </div>
+                {{#Instagram}}
+                <div class="btn-fullw">
+                    <div class="btn-group">
+                        <a href="{{Instagram}}" class="btn" target="_blank">{{ResourcesTemplate.InstaFollowUs}}</a>
+                    </div>
+                </div>
+                {{/Instagram}}
+
+            </div>
+        </section>
+        {{/HasInstagramActivated}}
+
+        {{#HasNewsletterActivated}}
+        <!-- SECTION NEWSLETTER -->
+        {{>Newsletter}}
+        {{/HasNewsletterActivated}}
+    </main>
+
+    {{>Footer}}
+    {{>CommonScripts}}
+    {{! COOKIES }}
+    <button id="cookie" style="background-color:#000;color:#fff;"><i class="las la-cookie-bite"></i></button>
+    {{>Messenger}}
+</body>
+
+</html>

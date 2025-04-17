@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="{{CurrentLang.IsoLang}}" culture="{{CurrentLang.CultureLang}}">
+<head>
+    <title>{{ResourcesTemplate.Around}} - {{CustomTitle}} - {{City}} - {{Country}}</title>
+    <meta name="description" content="{{SubtitleAround}}">
+    {{>CommonMetaTags}}
+    <link rel="canonical" href="{{UrlAround}}" />
+    <meta property="og:url" content="{{UrlAround}}" />
+    <meta property="og:title" content="{{ResourcesTemplate.Around}}" />
+    <meta property="og:image" content="{{#Photos.0}}{{UrlMedias}}/crop-300x200/{{IdMedia}}/{{FileNamePhoto}}{{/Photos.0}}" />
+    <meta property="og:description" content="{{SubtitleAround}}" />
+    {{>FaviconTags}}
+    {{>CommonStylesheets}}
+</head>
+<body>
+    {{{ScriptAnalytics}}}
+    {{{GoogleTagManagerBody}}}
+
+    <main class="around">
+        <!-- SECTION BANNER & WIDGET BE -->
+        <section class="section-widget-be">
+            <div class="content-section">
+
+                {{>Header}}
+
+                <div class="img-video-and-title">
+                    <img class="section-title-BG bg-img" src="{{#Photos.2}}{{UrlMedias}}/crop-1600x400/{{IdMedia}}/{{FileNamePhoto}}{{/Photos.2}}{{^Photos.2}}{{#Photos.0}}{{UrlMedias}}/crop-1600x400/{{IdMedia}}/{{FileNamePhoto}}{{/Photos.0}}{{/Photos.2}}" alt="{{NamePhoto}}-bg-around" />
+
+                    <h1>{{ResourcesTemplate.pageMenuTitle_around}}</h1>
+                </div>
+
+                {{#HasBookingActivated}}
+                <div id="section-BE" class="section-BE-home">
+                    <div class="check-availability">
+                        <div class="rounded-box">
+                            {{>Widget-BE}}
+                            {{>Widget-BE-secure}}
+                        </div>
+                    </div>
+                </div>
+                {{/HasBookingActivated}}
+
+            </div>
+        </section>
+
+        <!-- SECTION AROUND -->
+        <section class="section">
+            <div class="content-section">
+
+                <div class="section-title">
+                    <h2>{{ResourcesTemplate.Area}}</h2>
+                </div>
+
+                <div class="around-items-w prestas-big-contain">
+                    {{#OisAssocied}}
+                    <div class="grid-item presta-contain" data-id-type="{{IdTypeOiAssocied}}" data-type-label="{{TypeOiAssocied}}" data-lat="{{XOiAssocied}}" data-lng="{{YOiAssocied}}">
+                        <div class="img-presta-contain">
+                            <div class="saw-prices">
+                                <span class="around-item-type">{{TypeOiAssocied}}</span>
+                            </div>
+
+                            {{#PhotoOiAssocied}}
+                            <img class="bg-img" src="{{UrlMedias}}/crop-550x350/{{IdMedia}}/{{FileNamePhoto}}" alt="{{NamePhoto}}-img-around" />
+                            {{/PhotoOiAssocied}}
+                        </div>
+
+                        <div class="infos-contain">
+                            <h3 data-name>{{TitleOiAssocied}}</h3>
+
+                            {{#DistanceOiAssocied}}
+                            <div class="around-distance">
+                                <i class="las la-map-marker"></i>{{ResourcesTemplate.At}} {{DistanceOiAssocied}} {{ResourcesTemplate.Km}} {{ResourcesTemplate.FromOurPlace}}
+                            </div>
+                            {{/DistanceOiAssocied}}
+
+                            <div class="descrip-around-contain">
+                                <div class="description-around">{{DescriptionOiAssocied}}</div>
+
+                                <div class="more-less-btn-contain seeMore4">
+                                    <a href="#" class="more-less-btn link-to-see see-all">{{ResourcesTemplate.ShowMore}}</a>
+                                </div>
+                                <div class="more-less-btn-contain seeLess4">
+                                    <a href="#" class="more-less-btn link-to-see see-menos">{{ResourcesTemplate.ShowLess}}</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="btn-around {{^TextOpinion}}no-opinion{{/TextOpinion}}">
+                            <div class="comment-item-w">
+                                <div class="icon-to-see icon-all">{{ResourcesTemplate.WhyWeRecommand}}</div>
+                                <div class="icon-to-see icon-menos hidden">{{ResourcesTemplate.WhyWeRecommand}}</div>
+                                <div class="text-opinion d-none">{{TextOpinion}}</div>
+                            </div>
+                        </div>
+                    </div>
+                    {{/OisAssocied}}
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECTION MAP & METEO -->
+        <section class="section">
+            <div class="content-section">
+
+                <div class="section-title">
+                    <h2>{{ResourcesTemplate.WhereAreWe}}</h2>
+                </div>
+
+                <div class="map-and-meteo-contain">
+                    <div class="section-map">
+                        <div id="applemapkit" class="fullwidth-mapkit" data-lat="{{X}}" data-lng="{{Y}}" data-string="{{CustomTitle}}, {{AddressLine}}, {{PostalCode}}, {{City}}, {{Country}}.">
+                            <div id="mapApple"></div>
+                        </div>
+                    </div>
+
+                    <div class="meteo-and-address">
+                        <div class="address-and-btn-contain">
+                            <div class="address-contain">
+                                <span><strong>{{ResourcesTemplate.ToCome}}</strong></span>
+
+                                <div class="address-line"><i class="las la-map-marker"></i><strong>{{CustomTitle}}, {{AddressLine}}, {{PostalCode}} {{City}}</strong></div>
+                            </div>
+
+                            <div class="btn-contain btn-contain-map-2">
+                                <div data-action="external-map" class="external-map btn">{{ResourcesTemplate.Itinerary}}</div>
+                            </div>
+                        </div>
+
+                        <div class="meteo-contain owl-carousel owl-theme slider-meteo-2">
+                            {{! Current conditions }}
+                            <div class="weather-item">
+                                <div class="date-and-city">
+                                    <span>{{CurrentLang.Day}}</span>
+                                    <span>.</span>
+                                    <span>{{City}}</span>
+                                    <span id="WeatherCcTemperature">{{CurrentWeather.WeatherTemperature}}°{{CurrentLang.TemperatureUnit}}</span>
+                                </div>
+
+                                <div class="weather-img-contain">
+                                    <canvas id="WeatherCcIcon" data="{{CurrentWeather.WeatherIcon}}" class="weather-icon"></canvas>
+
+                                    <div class="meteo-img" data-url="https://static.elloha.com/webgen/img/weather/">
+                                        <div class="opacity"></div>
+                                    </div>
+
+                                    <div class="weather-trad" data="{{CurrentWeather.WeatherIcon}}"></div>
+                                </div>
+                            </div>
+                            {{! Day + 1 }}
+                            <div class="weather-item">
+                                <div class="date-and-city">
+                                    <span>{{CurrentLang.DayPlus1}}</span>
+                                    <span>.</span>
+                                    <span id="WeatherDay1Temperature">{{NextDaysWeather.0.WeatherTemperature}}°{{CurrentLang.TemperatureUnit}}</span>
+                                </div>
+
+                                <div class="weather-img-contain">
+                                    <canvas id="WeatherCcIcon" data="{{NextDaysWeather.0.WeatherIcon}}" class="weather-icon"></canvas>
+
+                                    <div class="meteo-img" data-url="https://static.elloha.com/webgen/img/weather/">
+                                        <div class="opacity"></div>
+                                    </div>
+
+                                    <div class="weather-trad" data="{{NextDaysWeather.0.WeatherIcon}}"></div>
+                                </div>
+                            </div>
+                            {{! Day + 2 }}
+                            <div class="weather-item">
+                                <div class="date-and-city">
+                                    <span>{{CurrentLang.DayPlus2}}</span>
+                                    <span>.</span>
+                                    <span id="WeatherDay2Temperature">{{NextDaysWeather.1.WeatherTemperature}}°{{CurrentLang.TemperatureUnit}}</span>
+                                </div>
+
+                                <div class="weather-img-contain">
+                                    <canvas id="WeatherCcIcon" data="{{NextDaysWeather.1.WeatherIcon}}" class="weather-icon"></canvas>
+
+                                    <div class="meteo-img" data-url="https://static.elloha.com/webgen/img/weather/">
+                                        <div class="opacity"></div>
+                                    </div>
+
+                                    <div class="weather-trad" data="{{NextDaysWeather.1.WeatherIcon}}"></div>
+                                </div>
+                            </div>
+                            {{! Day + 3 }}
+                            <div class="weather-item">
+                                <div class="date-and-city">
+                                    <span>{{CurrentLang.DayPlus3}}</span>
+                                    <span>.</span>
+                                    <span id="WeatherDay3Temperature">{{NextDaysWeather.2.WeatherTemperature}}°{{CurrentLang.TemperatureUnit}}</span>
+                                </div>
+
+                                <div class="weather-img-contain">
+                                    <canvas id="WeatherCcIcon" data="{{NextDaysWeather.2.WeatherIcon}}" class="weather-icon"></canvas>
+
+                                    <div class="meteo-img" data-url="https://static.elloha.com/webgen/img/weather/">
+                                        <div class="opacity"></div>
+                                    </div>
+
+                                    <div class="weather-trad" data="{{NextDaysWeather.2.WeatherIcon}}"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="btn-contain btn-contain-map-1">
+                            <div data-action="external-map" class="external-map btn">{{ResourcesTemplate.Itinerary}}</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    {{>Footer}}
+    {{>CommonScripts}}
+    {{>Messenger}}
+</body>
+</html>

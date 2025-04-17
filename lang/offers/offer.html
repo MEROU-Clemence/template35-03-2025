@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="{{CurrentLang.IsoLang}}" culture="{{CurrentLang.CultureLang}}">
+<head>
+    <title>{{^IsRestaurant}}{{CurrentPrestation.TitrePresta}}{{/IsRestaurant}}{{#IsRestaurant}}{{ResourcesTemplate.CarteMenus}}{{/IsRestaurant}} - {{CustomTitle}} - {{City}} - {{Country}}</title>
+    <meta name="description" content="{{CurrentPrestation.DescriptionPrestaLength150}}">
+    {{>CommonMetaTags}}
+    <link rel="canonical" href="{{UrlPrestaTemplate}}" />
+    <meta property="og:url" content="{{UrlPrestaTemplate}}" />
+    <meta property="og:title" content="{{^IsRestaurant}}{{CurrentPrestation.TitrePresta}}{{/IsRestaurant}}{{#IsRestaurant}}{{ResourcesTemplate.CarteMenus}}{{/IsRestaurant}}" />
+    <meta property="og:image" content="{{#CurrentPrestation.PhotosPresta.0}}{{UrlMedias}}/crop-300x200/{{IdMedia}}/{{FileNamePhoto}}{{/CurrentPrestation.PhotosPresta.0}}{{^CurrentPrestation.PhotosPresta.0}}{{#Photos.0}}{{UrlMedias}}/crop-300x200/{{IdMedia}}/{{FileNamePhoto}}{{/Photos.0}}{{/CurrentPrestation.PhotosPresta.0}}" />
+    <meta property="og:description" content="{{CurrentPrestation.DescriptionPrestaLength150}}" />
+    {{>FaviconTags}}
+    {{>CommonStylesheets}}
+    {{#HasBookingActivated}}{{>ScriptCalendarClick}}{{/HasBookingActivated}}
+</head>
+<body>
+    {{{ScriptAnalytics}}}
+    {{{GoogleTagManagerBody}}}
+
+    <main class="detail">
+        <!-- SECTION BANNER & WIDGET BE -->
+        <section class="section-widget-be">
+            <div class="content-section">
+
+                {{>Header}}
+
+                <div class="img-video-and-title">
+                    <div class="img-and-price-detail">
+                        <img class="section-title-BG bg-img" src="{{#CurrentPrestation.PhotosPresta.0}}{{UrlMedias}}/crop-1600x400/{{IdMedia}}/{{FileNamePhoto}}{{/CurrentPrestation.PhotosPresta.0}}{{^CurrentPrestation.PhotosPresta.0}}{{#Photos.0}}{{UrlMedias}}/crop-1600x400/{{IdMedia}}/{{FileNamePhoto}}{{/Photos.0}}{{/CurrentPrestation.PhotosPresta.0}}" alt="{{NamePhoto}}-bg-detail-offre" />
+
+                        {{#CurrentPrestation.MinPricePresta}}
+                        <span>{{ResourcesTemplate.PriceFrom}} {{CurrentPrestation.MinPricePresta}}{{CurrencySymbol}}{{^isActivity}} / {{ResourcesTemplate.Night}}{{/isActivity}}</span>
+                        {{/CurrentPrestation.MinPricePresta}}
+                    </div>
+
+                    <h1>{{CurrentPrestation.TitrePresta}}</h1>
+                </div>
+
+                {{#HasBookingActivated}}
+                <div id="section-BE" class="section-BE-home">
+                    <div class="check-availability">
+                        <div class="rounded-box">
+                            {{>Widget-BE}}
+                            {{>Widget-BE-secure}}
+                        </div>
+                    </div>
+                </div>
+                {{/HasBookingActivated}}
+
+            </div>
+        </section>
+
+        <!-- SECTION DETAILS -->
+        <section class="section">
+            <div class="content-section">
+
+                <div class="bloc-presentation">
+                    <!-- SECTION PRESENTATION -->
+                    <div class="presentation-and-avatar presentation-detail {{#IsRestaurant}}presentation-resto{{/IsRestaurant}}">
+                        <div class="presentation">
+                            {{^IsRestaurant}}
+                            <h2>{{ResourcesTemplate.Presentation}}</h2>
+
+                            <div class="description">{{{CurrentPrestation.DescriptionPresta}}}</div>
+
+                            <div id="seeMore2" class="more-less-btn-contain">
+                                <a href="#" class="more-less-btn">{{ResourcesTemplate.ReadMore2}}</a>
+                            </div>
+                            <div id="seeLess2" class="more-less-btn-contain">
+                                <a href="#" class="more-less-btn">{{ResourcesTemplate.ReadLess2}}</a>
+                            </div>
+                            {{/IsRestaurant}}
+
+                            {{#IsRestaurant}}
+                            <div class="form-adds-detail-resto">
+                                {{#Prestations}}
+                                <div class="menus-restau">
+                                    <div class="text-center">
+
+                                        <h2 class="">{{TitrePresta}}</h2>
+
+                                        {{#AvailableDu}}
+                                        <div class="date-menu">
+                                            <i class="las la-calendar"></i>
+                                            <span class="date-os"><strong>{{ResourcesTemplate.MenuAvailable}} {{AvailableDu}}</strong></span>
+                                            <span class="date-os"><strong>{{ResourcesTemplate.DateTo}} {{AvailableAu}}</strong></span>
+                                        </div>
+                                        {{/AvailableDu}}
+                                        <div class="wavy-separator"></div>
+                                        <div class="description-menu">{{{DescriptionPresta}}}</div>
+                                        {{#Included}}
+                                        <div class="enplus">
+                                            <span class="title">{{ResourcesTemplate.MenuIncludes}} : </span>
+                                            <span>{{Included}}</span>
+                                        </div>
+                                        {{/Included}}
+                                        {{#Excluded}}
+                                        <div class="enplus">
+                                            <span class="title">{{ResourcesTemplate.MenuExcludes}} : </span>
+                                            <span>{{Excluded}}</span>
+                                        </div>
+                                        {{/Excluded}}
+
+                                    </div>
+                                </div>
+                                {{/Prestations}}
+                            </div>
+                            {{/IsRestaurant}}
+
+                            {{#isActivity}}
+                            {{^IsRestaurant}}
+                            <div class="bloc-infos bloc-infos-inclued-exclued">
+                                {{#CurrentPrestation.Included}}
+                                <div class="m-b-10">
+                                    <div>
+                                        <i class="las la-check-circle"></i>
+                                    </div>
+                                    <div>
+                                        <strong>{{ResourcesTemplate.FormulaIncludes}} :</strong>
+                                        {{CurrentPrestation.Included}}
+                                    </div>
+                                </div>
+                                {{/CurrentPrestation.Included}}
+                                {{#CurrentPrestation.Excluded}}
+                                <div class="m-b-10">
+                                    <div>
+                                        <i class="las la-times-circle"></i>
+                                    </div>
+                                    <div>
+                                        <strong>{{ResourcesTemplate.FormulaExcludes}} :</strong>
+                                        {{CurrentPrestation.Excluded}}
+                                    </div>
+                                </div>
+                                {{/CurrentPrestation.Excluded}}
+                                {{#CurrentPrestation.Equipments}}
+                                <div class="m-b-10">
+                                    <div>
+                                        <i class="las la-arrow-alt-circle-right"></i>
+                                    </div>
+                                    <div>
+                                        <strong>{{ResourcesTemplate.EquipmentToProvide}} :</strong>
+                                        {{CurrentPrestation.Equipments}}
+                                    </div>
+                                </div>
+                                {{/CurrentPrestation.Equipments}}
+                                {{#CurrentPrestation.Documents}}
+                                <div class="m-b-10">
+                                    <div>
+                                        <i class="las la-plus-circle"></i>
+                                    </div>
+                                    <div>
+                                        <strong>{{ResourcesTemplate.DocumentsToProvide}} :</strong>
+                                        {{CurrentPrestation.Documents}}
+                                    </div>
+                                </div>
+                                {{/CurrentPrestation.Documents}}
+                            </div>
+                            {{/IsRestaurant}}
+                            {{/isActivity}}
+                        </div>
+
+                        {{#isActivity}}
+                        {{^IsRestaurant}}
+                        <hr />
+
+                        <div class="bloc-infos">
+                            {{#CurrentPrestation.DurationPresta}}
+                            <div class="m-b-10">
+                                <div>
+                                    <i class="las la-clock i-left"></i><strong>{{ResourcesTemplate.Duration}} :</strong>
+                                </div>
+                                <div>
+                                    {{CurrentPrestation.DurationPresta}} {{CurrentPrestation.DurationUnitPresta}}
+                                </div>
+                            </div>
+                            {{/CurrentPrestation.DurationPresta}}
+                            {{#CurrentPrestation.AgeMinimum}}
+                            <div class="m-b-10">
+                                <div>
+                                    <i class="las la-user i-left"></i><strong>{{ResourcesTemplate.AgeStartingFrom}} :</strong>
+                                </div>
+                                <div>
+                                    {{CurrentPrestation.AgeMinimum}}{{#CurrentPrestation.AgeMaximum}} - {{CurrentPrestation.AgeMaximum}}{{/CurrentPrestation.AgeMaximum}} {{ResourcesTemplate.AgeYears}}
+                                </div>
+                            </div>
+                            {{/CurrentPrestation.AgeMinimum}}
+                            {{#CurrentPrestation.Difficulty}}
+                            <div class="m-b-10">
+                                <div>
+                                    <i class="las la-signal i-left"></i><strong>{{ResourcesTemplate.Difficulty}}</strong>
+                                </div>
+                                <div>
+                                    {{CurrentPrestation.Difficulty}} / 5
+                                </div>
+                            </div>
+                            {{/CurrentPrestation.Difficulty}}
+                            {{#CurrentPrestation.IsAdultRequired}}
+                            <div class="m-b-10">
+                                <div>
+                                    <i class="las la-user-friends i-left"></i><strong>{{ResourcesTemplate.AdultAccompaniment}}</strong>
+                                </div>
+                                <div>{{{ResourcesTemplate.Required}}}</div>
+                            </div>
+                            {{/CurrentPrestation.IsAdultRequired}}
+                            <div class="m-b-10">
+                                <div>
+                                    <i class="las la-calendar-check i-left"></i><strong>{{#CurrentPrestation.HasDelayedConfirmation}}</strong>
+                                </div>
+                                <div>
+                                    <strong>
+                                        {{ResourcesTemplate.DelayedFemale}}({{CurrentPrestation.DelayedConfirmationDays}}{{ResourcesTemplate.durationUnit_Day}}{{ResourcesTemplate.MaximumLower}})
+                                        {{/CurrentPrestation.HasDelayedConfirmation}}
+                                        {{^CurrentPrestation.HasDelayedConfirmation}}{{ResourcesTemplate.Immediate}}
+                                        {{/CurrentPrestation.HasDelayedConfirmation}}
+                                    </strong>
+                                </div>
+                            </div>
+                        </div>
+                        {{/IsRestaurant}}
+                        {{/isActivity}}
+
+                        {{^isActivity}}
+                        <hr />
+
+                        <div class="bloc-infos">
+                            {{#CurrentPrestation.CheckinTime}}
+                            <div class="m-b-10">
+                                <div>
+                                    <i class="las la-clock i-left"></i><strong>{{ResourcesTemplate.CheckinTime}} :</strong>
+                                </div>
+                                <div>
+                                    {{CurrentPrestation.CheckinTimeString}}
+                                </div>
+                            </div>
+                            {{/CurrentPrestation.CheckinTime}}
+                            {{#CurrentPrestation.CheckoutTime}}
+                            <div class="m-b-10">
+                                <div>
+                                    <i class="las la-clock i-left"></i><strong>{{ResourcesTemplate.CheckoutTime}} :</strong>
+                                </div>
+                                <div>
+                                    {{CurrentPrestation.CheckoutTimeString}}
+                                </div>
+                            </div>
+                            {{/CurrentPrestation.CheckoutTime}}
+                            {{#CurrentPrestation.MaxCapacityPresta}}
+                            <div class="m-b-10">
+                                <div>
+                                    <i class="las la-user-friends i-left"></i><strong>{{ResourcesTemplate.MaxCapacity}}</strong>
+                                </div>
+                                <div>
+                                    {{CurrentPrestation.MaxCapacityPresta}} {{ResourcesTemplate.CapacityPersons}}
+                                </div>
+                            </div>
+                            {{/CurrentPrestation.MaxCapacityPresta}}
+                            {{#CurrentPrestation.NbSimpleBeds}}
+                            <div class="m-b-10">
+                                <div>
+                                    <i class="las la-bed i-left"></i><strong>{{ResourcesTemplate.SimpleBeds}}</strong>
+                                </div>
+                                <div>{{CurrentPrestation.NbSimpleBeds}}</div>
+                            </div>
+                            {{/CurrentPrestation.NbSimpleBeds}}
+                            {{#CurrentPrestation.NbDoubleBeds}}
+                            <div class="m-b-10">
+                                <div>
+                                    <i class="las la-bed i-left"></i><strong>{{ResourcesTemplate.DoubleBeds}}</strong>
+                                </div>
+                                <div>{{CurrentPrestation.NbDoubleBeds}}</div>
+                            </div>
+                            {{/CurrentPrestation.NbDoubleBeds}}
+                            {{#CurrentPrestation.NbKingBeds}}
+                            <div class="m-b-10">
+                                <div>
+                                    <i class="las la-bed i-left"></i><strong>{{ResourcesTemplate.KingBeds}}</strong>
+                                </div>
+                                <div>{{CurrentPrestation.NbKingBeds}}</div>
+                            </div>
+                            {{/CurrentPrestation.NbKingBeds}}
+                            {{#CurrentPrestation.NbQueenBeds}}
+                            <div class="m-b-10">
+                                <div>
+                                    <i class="las la-bed i-left"></i><strong>{{ResourcesTemplate.QueenBeds}}</strong>
+                                </div>
+                                <div>
+                                    {{CurrentPrestation.NbQueenBeds}}
+                                </div>
+                            </div>
+                            {{/CurrentPrestation.NbQueenBeds}}
+                            {{#CurrentPrestation.NbBunkBeds}}
+                            <div class="m-b-10">
+                                <div>
+                                    <i class="las la-bed i-left"></i><strong>{{ResourcesTemplate.BunkBeds}}</strong>
+                                </div>
+                                <div>
+                                    {{CurrentPrestation.NbBunkBeds}}
+                                </div>
+                            </div>
+                            {{/CurrentPrestation.NbBunkBeds}}
+                            {{#CurrentPrestation.NbSofaBeds}}
+                            <div class="m-b-10">
+                                <div>
+                                    <i class="las la-bed i-left"></i><strong>{{ResourcesTemplate.SofaBeds}}</strong>
+                                </div>
+                                <div>
+                                    {{CurrentPrestation.NbSofaBeds}}
+                                </div>
+                            </div>
+                            {{/CurrentPrestation.NbSofaBeds}}
+                            {{#CurrentPrestation.NbSofaDoubleBeds}}
+                            <div class="m-b-10">
+                                <div>
+                                    <i class="las la-bed i-left"></i><strong>{{ResourcesTemplate.SofaDoubleBeds}}</strong>
+                                </div>
+                                <div>
+                                    {{CurrentPrestation.NbSofaDoubleBeds}}
+                                </div>
+                            </div>
+                            {{/CurrentPrestation.NbSofaDoubleBeds}}
+                            {{#CurrentPrestation.NbMurphyBeds}}
+                            <div class="m-b-10">
+                                <div>
+                                    <i class="las la-bed i-left"></i><strong>{{ResourcesTemplate.MurphyBeds}}</strong>
+                                </div>
+                                <div>
+                                    {{CurrentPrestation.NbMurphyBeds}}
+                                </div>
+                            </div>
+                            {{/CurrentPrestation.NbMurphyBeds}}
+                            {{#CurrentPrestation.HasExtraBeds}}
+                            <div class="m-b-10">
+                                <div>
+                                    <i class="las la-user-plus i-left"></i><strong>{{ResourcesTemplate.ExtraBeds}}</strong>
+                                </div>
+                                <div>
+                                    {{ResourcesTemplate.Yes}}
+                                </div>
+                            </div>
+                            {{/CurrentPrestation.HasExtraBeds}}
+                            {{#CurrentPrestation.HasBabyBeds}}
+                            <div class="m-b-10">
+                                <div>
+                                    <i class="las la-baby-carriage i-left"></i><strong>{{ResourcesTemplate.BabyBeds}}</strong>
+                                </div>
+                                <div>{{ResourcesTemplate.Yes}}</div>
+                            </div>
+                            {{/CurrentPrestation.HasBabyBeds}}
+                        </div>
+                        {{/isActivity}}
+                    </div>
+
+                    {{^isActivity}}
+                    {{#CurrentPrestation.SCEAPresta.0}}
+                    <hr />
+
+                    <!-- SECTION SCEA -->
+                    <div class="section-scea">
+                        <h3>{{ResourcesTemplate.TheServices}}</h3>
+
+                        <div class="options-scea-contain">
+                            {{#CurrentPrestation.SCEAPresta}}
+                            <div class="options-scea">{{LibelleService}}</div>
+                            {{/CurrentPrestation.SCEAPresta}}
+                        </div>
+
+                        <div id="seeMore1" class="more-less-btn-contain">
+                            <a href="#" class="more-less-btn">{{ResourcesTemplate.SeeMore}}</a>
+                        </div>
+                        <div id="seeLess1" class="more-less-btn-contain">
+                            <a href="#" class="more-less-btn">{{ResourcesTemplate.SeeLess}}</a>
+                        </div>
+                    </div>
+                    {{/CurrentPrestation.SCEAPresta.0}}
+                    {{/isActivity}}
+
+                </div>
+
+            </div>
+        </section>
+
+        {{^IsRestaurant}}
+        <!-- SECTION GALERIE -->
+        <section class="section section-gallery">
+            <div class="content-section">
+
+                <div class="photo-counter">
+                    <div class="current-photo-container">
+                        <span class="slide-number current">01</span>
+                    </div>
+                    <span class="separator">/</span>
+                    <span class="total-photos"></span>
+                </div>
+
+                <div class="slider-gallery-contain">
+                    {{#CurrentPrestation.PhotosPresta.0}}
+                    <div class="slider-gallery">
+                        {{#CurrentPrestation.PhotosPresta}}
+                        <div class="slide-gallery">
+                            <img class="img-gallery" src="{{UrlMedias}}/crop-1300x800/{{IdMedia}}/{{FileNamePhoto}}" alt="{{NamePhoto}}-photo-gallery">
+                        </div>
+                        {{/CurrentPrestation.PhotosPresta}}
+                    </div>
+                    {{/CurrentPrestation.PhotosPresta.0}}
+                </div>
+
+            </div>
+        </section>
+        {{/IsRestaurant}}
+
+        {{#isActivity}}
+        <!-- SECTION HORAIRES -->
+        <section class="section">
+            <div class="content-section">
+
+                <div class="hours-contain">
+                    <h3>{{ResourcesTemplate.OpeningHours2}}</h3>
+
+                    <div class="all-hours">
+                        {{#Openings}}
+                        <div class="text-infos-hours">
+                            <div class="day-hours"><strong>{{DayLabel}}</strong></div>
+
+                            <div class="hours-hours">
+                                {{#IsClosed}}
+                                <div class="closed">{{ResourcesTemplate.Closed}}</div>
+                                {{/IsClosed}}
+
+                                {{^IsClosed}}{{#HasBreak}}
+                                <div class="hours-with-break">
+                                    <div>{{StartHourBeforeBreak}} - {{EndHourBeforeBreak}}</div>
+
+                                    <div>{{StartHourAfterBreak}} - {{EndHourAfterBreak}}</div>
+                                </div>
+                                {{/HasBreak}}{{/IsClosed}}
+
+                                {{^IsClosed}}{{^HasBreak}}
+                                <div>{{StartHour}} - {{EndHour}}</div>
+                                {{/HasBreak}}{{/IsClosed}}
+                            </div>
+                        </div>
+                        {{/Openings}}
+                    </div>
+                </div>
+
+            </div>
+        </section>
+        {{/isActivity}}
+
+        {{#HasSpecialOffers}}
+        <!-- SECTION OFFRES SPECIALES -->
+        {{>SpecialOffers}}
+        {{/HasSpecialOffers}}
+
+        {{#HasOptions}}
+        <!-- SECTION OPTIONS -->
+        {{>Options}}
+        {{/HasOptions}}
+
+        {{#CurrentPrestation.HasOtherPrestations}}
+        <!-- SECTION AUTRES PRESTAS/OFFRES -->
+        <section class="section">
+            <div class="content-section">
+
+                <div class="section-title">
+                    <h2>
+                        {{^isActivity}}{{ResourcesTemplate.Offers_OurOtherOffers_1}}{{/isActivity}}
+                        {{#isActivity}}{{^IsRestaurant}}{{ResourcesTemplate.Offers_OurOtherOffers_5}}{{/IsRestaurant}}{{/isActivity}}
+                        {{#isActivity}}{{#IsRestaurant}}{{ResourcesTemplate.CarteMenus}}{{/IsRestaurant}}{{/isActivity}}
+                    </h2>
+                </div>
+
+                <div class="owl-carousel owl-theme slider-other-prestas">
+                    {{#CurrentPrestation.OtherPrestations}}
+                    <div class="presta-contain">
+                        <div class="img-presta-contain">
+                            {{#MinPricePresta}}
+                            <div class="saw-prices">
+                                <span class="price-begin">{{ResourcesTemplate.PriceFrom}}</span>
+                                <span class="presta-price">
+                                    {{MinPricePresta}}{{CurrencySymbol}}{{^isActivity}} /{{ResourcesTemplate.Night}}{{/isActivity}}
+                                </span>
+                            </div>
+                            {{/MinPricePresta}}
+
+                            {{#PhotosPresta.0}}
+                            <a href="{{UrlPrestaTemplate}}" class="bg-img" style="background-image: url({{UrlMedias}}/crop-800x800/{{IdMedia}}/{{FileNamePhoto}});" alt="{{NamePhoto}}-presta" itemprop="url"></a>
+                            {{/PhotosPresta.0}}
+                        </div>
+
+                        <div class="infos-contain">
+                            <h3><a href="{{UrlPrestaTemplate}}" itemprop="url">{{TitrePresta}}</a></h3>
+
+                            <div class="description-presta">{{DescriptionPrestaLength150}}</div>
+                        </div>
+                    </div>
+                    {{/CurrentPrestation.OtherPrestations}}
+                </div>
+
+                <div class="btn-contain btn-contain-prestas">
+                    <a class="btn" href="{{UrlOffers}}" itemprop="url">{{^isActivity}}{{ResourcesTemplate.AllOurRooms}}{{/isActivity}}{{#isActivity}}{{^IsRestaurant}}{{ResourcesTemplate.AllOurActivities}}{{/IsRestaurant}}{{/isActivity}}{{#isActivity}}{{#IsRestaurant}}{{ResourcesTemplate.CarteMenus}}{{/IsRestaurant}}{{/isActivity}}</a>
+                </div>
+
+            </div>
+        </section>
+        {{/CurrentPrestation.HasOtherPrestations}}
+
+        {{#HasCalendarActivated}}
+        <!-- SECTION CALENDAR -->
+        {{>Calendar}}
+        {{/HasCalendarActivated}}
+
+        {{#isActivity}}
+        {{^IsRestaurant}}
+        <!-- SECTION MAP & METEO -->
+        <section class="section">
+            <div class="content-section">
+
+                <div class="section-title">
+                    <h2>{{ResourcesTemplate.WhereAreWe}}</h2>
+                </div>
+
+                <div class="map-and-meteo-contain">
+                    <div class="section-map">
+                        <div id="applemapkit" class="fullwidth-mapkit">
+                            {{#CurrentPrestation.RdvX}}<input class="button-localisation" type="hidden" id="Meeting-point-geo" data-lat="{{CurrentPrestation.RdvX}}" data-lng="{{CurrentPrestation.RdvY}}">{{/CurrentPrestation.RdvX}}
+                            <div id="mapApple"></div>
+                        </div>
+                    </div>
+
+                    <div class="meteo-and-address">
+                        <div class="address-and-btn-contain">
+                            <div class="address-contain">
+                                <span><strong>{{ResourcesTemplate.ToCome}}</strong></span>
+
+                                {{#CurrentPrestation.RdvCity}}
+                                <div class="address-line"><i class="las la-map-marker"></i><strong>{{CustomTitle}}, {{#CurrentPrestation.RdvStreet1}}{{CurrentPrestation.RdvStreet1}}, {{/CurrentPrestation.RdvStreet1}} {{#CurrentPrestation.RdvStreet2}}{{CurrentPrestation.RdvStreet2}}, {{/CurrentPrestation.RdvStreet2}} {{CurrentPrestation.RdvPostalCode}}, {{CurrentPrestation.RdvCity}}, {{Country}}</strong></div>
+                                {{/CurrentPrestation.RdvCity}}
+
+                                {{^CurrentPrestation.RdvCity}}
+                                <div class="address-line"><i class="las la-map-marker"></i><strong>{{CustomTitle}}, {{AddressLine}}, {{PostalCode}} {{City}}</strong></div>
+                                {{/CurrentPrestation.RdvCity}}
+                            </div>
+
+                            <div class="btn-contain btn-contain-map-2">
+                                <div data-action="external-map" class="external-map btn">{{ResourcesTemplate.Itinerary}}</div>
+                            </div>
+                        </div>
+
+                        <div class="meteo-contain owl-carousel owl-theme slider-meteo-2">
+                            {{! Current conditions }}
+                            <div class="weather-item">
+                                <div class="date-and-city">
+                                    <span>{{CurrentLang.Day}}</span>
+                                    <span>.</span>
+                                    <span>{{City}}</span>
+                                    <span id="WeatherCcTemperature">{{CurrentWeather.WeatherTemperature}}°{{CurrentLang.TemperatureUnit}}</span>
+                                </div>
+
+                                <div class="weather-img-contain">
+                                    <canvas id="WeatherCcIcon" data="{{CurrentWeather.WeatherIcon}}" class="weather-icon"></canvas>
+
+                                    <div class="meteo-img" data-url="https://static.elloha.com/webgen/img/weather/">
+                                        <div class="opacity"></div>
+                                    </div>
+
+                                    <div class="weather-trad" data="{{CurrentWeather.WeatherIcon}}"></div>
+                                </div>
+                            </div>
+                            {{! Day + 1 }}
+                            <div class="weather-item">
+                                <div class="date-and-city">
+                                    <span>{{CurrentLang.DayPlus1}}</span>
+                                    <span>.</span>
+                                    <span id="WeatherDay1Temperature">{{NextDaysWeather.0.WeatherTemperature}}°{{CurrentLang.TemperatureUnit}}</span>
+                                </div>
+
+                                <div class="weather-img-contain">
+                                    <canvas id="WeatherCcIcon" data="{{NextDaysWeather.0.WeatherIcon}}" class="weather-icon"></canvas>
+
+                                    <div class="meteo-img" data-url="https://static.elloha.com/webgen/img/weather/">
+                                        <div class="opacity"></div>
+                                    </div>
+
+                                    <div class="weather-trad" data="{{NextDaysWeather.0.WeatherIcon}}"></div>
+                                </div>
+                            </div>
+                            {{! Day + 2 }}
+                            <div class="weather-item">
+                                <div class="date-and-city">
+                                    <span>{{CurrentLang.DayPlus2}}</span>
+                                    <span>.</span>
+                                    <span id="WeatherDay2Temperature">{{NextDaysWeather.1.WeatherTemperature}}°{{CurrentLang.TemperatureUnit}}</span>
+                                </div>
+
+                                <div class="weather-img-contain">
+                                    <canvas id="WeatherCcIcon" data="{{NextDaysWeather.1.WeatherIcon}}" class="weather-icon"></canvas>
+
+                                    <div class="meteo-img" data-url="https://static.elloha.com/webgen/img/weather/">
+                                        <div class="opacity"></div>
+                                    </div>
+
+                                    <div class="weather-trad" data="{{NextDaysWeather.1.WeatherIcon}}"></div>
+                                </div>
+                            </div>
+                            {{! Day + 3 }}
+                            <div class="weather-item">
+                                <div class="date-and-city">
+                                    <span>{{CurrentLang.DayPlus3}}</span>
+                                    <span>.</span>
+                                    <span id="WeatherDay3Temperature">{{NextDaysWeather.2.WeatherTemperature}}°{{CurrentLang.TemperatureUnit}}</span>
+                                </div>
+
+                                <div class="weather-img-contain">
+                                    <canvas id="WeatherCcIcon" data="{{NextDaysWeather.2.WeatherIcon}}" class="weather-icon"></canvas>
+
+                                    <div class="meteo-img" data-url="https://static.elloha.com/webgen/img/weather/">
+                                        <div class="opacity"></div>
+                                    </div>
+
+                                    <div class="weather-trad" data="{{NextDaysWeather.2.WeatherIcon}}"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="btn-contain btn-contain-map-1">
+                            <div data-action="external-map" class="external-map btn">{{ResourcesTemplate.Itinerary}}</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+        {{/IsRestaurant}}
+        {{/isActivity}}
+    </main>
+
+    {{>Footer}}
+    {{>CommonScripts}}
+    {{>Messenger}}
+</body>
+</html>

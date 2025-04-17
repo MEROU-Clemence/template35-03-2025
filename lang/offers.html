@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="{{CurrentLang.IsoLang}}" culture="{{CurrentLang.CultureLang}}">
+<head>
+    <title>{{ResourcesTemplate.Offers_MenuTitle}} - {{CustomTitle}} - {{City}} - {{Country}}</title>
+    <meta name="description" content="{{CustomTitle}} - {{ResourcesTemplate.Offers_OurOffers}}">
+    {{>CommonMetaTags}}
+    <link rel="canonical" href="{{UrlOffers}}" />
+    <meta property="og:url" content="{{UrlOffers}}" />
+    <meta property="og:title" content="{{ResourcesTemplate.Offers_MenuTitle}}" />
+    <meta property="og:image" content="{{#Photos.0}}{{UrlMedias}}/crop-300x200/{{IdMedia}}/{{FileNamePhoto}}{{/Photos.0}}" />
+    <meta property="og:description" content="{{CustomTitle}} - {{ResourcesTemplate.Offers_OurOffers}}" />
+    {{>FaviconTags}}
+    {{>CommonStylesheets}}
+</head>
+<body>
+    {{{ScriptAnalytics}}}
+    {{{GoogleTagManagerBody}}}
+
+    <main class="offers">
+        <!-- SECTION BANNER & WIDGET BE -->
+        <section class="section-widget-be">
+            <div class="content-section">
+
+                {{>Header}}
+
+                <div class="img-video-and-title">
+                    <img class="section-title-BG bg-img" src="{{#Photos.0}}{{UrlMedias}}/crop-1600x400/{{IdMedia}}/{{FileNamePhoto}}{{/Photos.0}}" alt="{{NamePhoto}}-bg-offres" />
+
+                    <h1>
+                        {{^isActivity}}{{ResourcesTemplate.ChooseYourRoom}}{{/isActivity}}
+                        {{#isActivity}}{{^IsRestaurant}}{{ResourcesTemplate.ChooseYourActivity}}{{/IsRestaurant}}{{/isActivity}}
+                        {{#isActivity}}{{#IsRestaurant}}{{ResourcesTemplate.ChooseYourMenu}}{{/IsRestaurant}}{{/isActivity}}
+                    </h1>
+                </div>
+
+                {{#HasBookingActivated}}
+                <div id="section-BE" class="section-BE-home">
+                    <div class="check-availability">
+                        <div class="rounded-box">
+                            {{>Widget-BE}}
+                            {{>Widget-BE-secure}}
+                        </div>
+                    </div>
+                </div>
+                {{/HasBookingActivated}}
+
+            </div>
+        </section>
+
+        <!-- SECTION PRESTAS/OFFRES -->
+        <section class="section">
+            <div class="content-section">
+
+                <div class="section-title">
+                    <h2>{{^isActivity}}{{ResourcesTemplate.Offers_OurOffers_1}}{{/isActivity}}{{#isActivity}}{{^IsRestaurant}}{{ResourcesTemplate.Offers_OurOffers_5}}{{/IsRestaurant}}{{/isActivity}}{{#isActivity}}{{#IsRestaurant}}{{ResourcesTemplate.CarteMenus}}{{/IsRestaurant}}{{/isActivity}}</h2>
+                </div>
+
+                <div class="prestas-big-contain prestas-big-contain-in-offers">
+                    {{#Prestations}}
+                    <div class="presta-contain">
+                        <div class="img-presta-contain">
+                            {{#MinPricePresta}}
+                            <div class="saw-prices">
+                                <span class="price-begin">{{ResourcesTemplate.PriceFrom}}</span>
+                                <span class="presta-price">
+                                    {{MinPricePresta}}{{CurrencySymbol}}{{^isActivity}} /{{ResourcesTemplate.Night}}{{/isActivity}}
+                                </span>
+                            </div>
+                            {{/MinPricePresta}}
+
+                            <div class="owl-carousel owl-theme slider-img-offers">
+                                {{#PhotosPresta}}
+                                <a href="{{UrlPrestaTemplate}}" class="bg-img" style="background-image: url({{UrlMedias}}/crop-800x800/{{IdMedia}}/{{FileNamePhoto}});" alt="{{NamePhoto}}-presta" itemprop="url"></a>
+                                {{/PhotosPresta}}
+                            </div>
+                            {{^PhotosPresta}}
+                            <a href="{{UrlPrestaTemplate}}" class="bg-img" style="background-image: url({{#Photos.1}}{{UrlMedias}}/crop-800x800/{{IdMedia}}/{{FileNamePhoto}}{{/Photos.1}});" alt="{{NamePhoto}}-presta" itemprop="url"></a>
+                            {{/PhotosPresta}}
+                        </div>
+
+                        <div class="infos-contain">
+                            <h3><a href="{{UrlPrestaTemplate}}" itemprop="url">{{TitrePresta}}</a></h3>
+
+                            {{#DescriptionPresta}}
+                            <div class="description-presta">{{{DescriptionPresta}}}</div>
+                            {{/DescriptionPresta}}
+                        </div>
+                    </div>
+                    {{/Prestations}}
+                </div>
+
+            </div>
+        </section>
+
+        {{#HasOptions}}
+        <!-- SECTION OPTIONS -->
+        {{>Options}}
+        {{/HasOptions}}
+
+        {{#HasCalendarActivated}}
+        <!-- SECTION CALENDAR -->
+        {{>Calendar}}
+        {{/HasCalendarActivated}}
+
+        {{#HasNewsletterActivated}}
+        <!-- SECTION NEWSLETTER -->
+        {{>Newsletter}}
+        {{/HasNewsletterActivated}}
+    </main>
+
+    {{>Footer}}
+    {{>CommonScripts}}
+    {{>Messenger}}
+</body>
+</html>
